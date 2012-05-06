@@ -1,0 +1,11 @@
+accounts:
+  your@email.com:
+    api_key: 9696ba35ebb3dc6c11c964c269f262a6
+    private_key: 50372be654ecacf9dbb1b431535f21d0
+
+default_hash: sha1
+default_format: json
+network_timeout: 20
+network_protocol: http
+network_port: 80
+host: pgeoffroy.api.payment.allopass.dev
