@@ -1,6 +1,6 @@
 require 'allorails'
 
-YOUR_SITE_ID = 281095
+YOUR_SITE_ID = 281629
 TEST_COUNTRY_CODE = 'UK'
 
 describe Allorails::Conf, "#init" do
@@ -41,5 +41,26 @@ describe Allorails::Api, "#get_onetime_pricing" do
         (ctry.code.length > 0).should be_true
       end
     end
+  end
+end
+
+describe Allorails::Api, "#create_discrete_button" do
+  api = Allorails::Api.new
+  resp = api.create_discrete_button({
+    'site_id' => YOUR_SITE_ID,
+    'product_name' => 'TEST-DISCRETE-BUTTON',
+    'forward_url' => 'http://any-test.url/is?good',
+    'price_mode' => 'price',
+    'amount' => 0.99,
+    'price_policy' => 'high-preferred',
+    'reference_currency' => 'EUR'
+  })
+  it "returns a valid response" do
+    resp.to_s.should_not be_nil
+    resp.is_a?(Allorails::Response::OnetimeButtonResponse).should be_true
+    (resp.json).should_not be_nil
+    # puts resp.json.inspect #DEBUG
+    resp.button_id.should_not be_nil
+    resp.website.is_a?(Allorails::Website).should be_true
   end
 end

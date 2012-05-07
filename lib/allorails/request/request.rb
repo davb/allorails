@@ -123,22 +123,26 @@ module Allorails
 
         port    = protocol == 'https' ? 443 : 80
         uri     = URI(protocol + '://' + server + ApiRequest::API_PATH + _path)
-        params  = _encode_parameters
         method  = _is_http_post ? 'POST' : 'GET'
         headers = {
           "Content-Type" => "application/x-www-form-urlencoded; charset=utf-8",
           "User-Agent" => "Allopass-ApiKit-AlloRails"
         }
+        
+        # use a proxy?
+        use_proxy = true
+        http_class = if use_proxy then Net::HTTP::Proxy('127.0.0.1', 9999) else Net::HTTP end
 
         # prepare and send HTTP request
-        Net::HTTP.start(uri.host, port, :use_ssl => uri.scheme == 'https') do |http|
+        http_class.start(uri.host, port, :use_ssl => uri.scheme == 'https') do |http|
           
           if method == 'GET'
-            uri.query = params
-            req = Net::HTTP::Get.new uri.request_uri
+            uri.query = _encode_parameters
+            req = http_class::Get.new uri.request_uri
           else
-            req = Net::HTTP::Post.new uri.path
-            req.body = params
+            #uri.query = _encode_parameters
+            req = http_class::Post.new uri.request_uri
+            req.body = _encode_parameters
           end    
           
           # set headers
@@ -147,7 +151,7 @@ module Allorails
           # send the request and see if successful
           case res = http.request(req)
             when Net::HTTPSuccess then return [res.to_hash, res.body]
-            else raise ApiUnavailableResourceError()
+            else raise Allorails::ApiUnavailableResourceError, "Request failed: #{res.body}"
           end
         end
       end
@@ -165,7 +169,7 @@ module Allorails
           params = params.merge(hash_codes)          
         end
         
-        URI::encode params.collect { |k,v| "#{k}=#{CGI::escape(v.to_s)}" }.join('&') 
+        URI::encode params.collect { |k,v| "#{k}=#{v}" }.join('&') #CGI::escape(v.to_s)
       end
     
     end # -- end class ApiRequest

@@ -21,7 +21,7 @@ module Allorails
       # Internal method checking the response
       # @throws ApiFalseResponseSignature If the expected signature is not found among response headers
       def _verify
-        raise ApiFalseResponseSignatureError unless @_headers['x-allopass-response-signature'].include?(@_signature)
+        raise Allorails::ApiFalseResponseSignatureError unless @_headers['x-allopass-response-signature'].include?(@_signature)
       end
       
       ## Custom print result
@@ -69,7 +69,7 @@ module Allorails
         begin
           @json = JsonNode.new(JSON.parse(body)['response'] || {})
         rescue JSON::ParserError => e
-          raise ApiWrongFormatResponseError
+          raise Allorails::ApiWrongFormatResponseError
         end
         _verify
       end
@@ -79,7 +79,7 @@ module Allorails
       # @throws ApiFalseResponseSignature If the expected signature is not found among response headers
       def _verify
         if json.code.nil? || json.code.to_i != 0
-          raise ApiRemoteErrorError
+          raise Allorails::ApiRemoteErrorError
         end
         super
       end
@@ -432,7 +432,7 @@ module Allorails
     
       ## Provides the website
       #  @return (Website) website
-      node_reader :website
+      node_reader :website, Website
     
       ## Provides the buy url
       #  @return (string) buy url

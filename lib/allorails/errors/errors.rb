@@ -20,7 +20,7 @@ module Allorails
   class ApiRemoteErrorError < StandardError
   end
 
-  class ApiUnavailableRessourceError < StandardError
+  class ApiUnavailableResourceError < StandardError
   end
   class ApiWrongFormatResponseError < StandardError
   end

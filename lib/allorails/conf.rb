@@ -24,12 +24,12 @@ module Allorails
     def _load_file
       path = File.join(File.dirname(__FILE__), Conf::FILE_PATH)
       # ensure the file exists
-      raise ApiConfFileMissingError unless File.exists?(path)
+      raise Allorails::ApiConfFileMissingError unless File.exists?(path)
       # parse and read the YAML file and store contents
       begin
         @config = YAML.load File.read(path)
       rescue ArgumentError => e
-        raise ApiConfFileCorruptedError
+        raise Allorails::ApiConfFileCorruptedError
       end
     end
     
@@ -42,7 +42,7 @@ module Allorails
       
     def _check_file
       Conf::REQUIRED_SECTIONS.each do |required_section|
-        raise ApiConfFileMissingSectionError(required_section) unless @config.has_key?(required_section)
+        raise Allorails::ApiConfFileMissingSectionError unless @config.has_key?(required_section)
       end
     end
     
@@ -86,7 +86,7 @@ module Allorails
       end
       
       # raise ApiConfAccountNotFoundError if email is provided but can't be found
-      raise ApiConfAccountNotFoundError
+      raise Allorails::ApiConfAccountNotFoundError
     end
   
     ## Returns the default response format
