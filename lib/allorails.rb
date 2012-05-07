@@ -1,13 +1,15 @@
+require 'allorails/core'
+
 require 'allorails/errors/errors'
 
 module Allorails
   
-  autoload :Conf, 'allorails/conf'
+  #autoload :Conf, 'allorails/conf'
   autoload :Api, 'allorails/api/api'
   
-  def self.Conf
-    Allorails::Conf.instance
-  end
+  #def self.Conf
+  #  Allorails::Conf.instance
+  #end
 
   autoload :Website, 'allorails/response/model'
   autoload :Country, 'allorails/response/model'
@@ -45,3 +47,5 @@ module Allorails
   end
   
 end
+
+require 'allorails/rails'

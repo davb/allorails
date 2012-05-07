@@ -47,7 +47,7 @@ module Allorails
       #  @return ApiResponse The API response
       def call()
         headers, body = self._build_parameters._sign._call
-        signature = self._hash(body + Allorails.Conf.private_key(@_email_account))
+        signature = self._hash(body + Allorails.config.private_key(@_email_account))
 
         if (@_mapping)
           return self._new_response(signature, headers, body)
@@ -64,18 +64,18 @@ module Allorails
 
         @_parameters.update({
           'api_ts' => Time.now.to_i,
-          'api_key' => Allorails.Conf.api_key(@_email_account),
-          'api_hash' => Allorails.Conf.default_hash
+          'api_key' => Allorails.config.api_key(@_email_account),
+          'api_hash' => Allorails.config.default_hash
         })
 
         if @_parameters.has_key?('format')
           if (@_mapping)
             @_parameters['format'] = self::MAPPING_FORMAT
           elsif !formats.include?(@_parameters['format'])
-            @_parameters['format'] = Allorails.Conf.default_format
+            @_parameters['format'] = Allorails.config.default_format
           end
         else
-          @_parameters['format'] = Allorails.Conf.default_format
+          @_parameters['format'] = Allorails.config.default_format
         end
 
         self
@@ -92,7 +92,7 @@ module Allorails
         end
         
         sign = params.sort.map{|p| "#{p[0]}#{p[1]}"}.join
-        @_parameters['api_sig'] = self._hash(sign + Allorails.Conf.private_key(@_email_account))
+        @_parameters['api_sig'] = self._hash(sign + Allorails.config.private_key(@_email_account))
         
         self
       end
@@ -117,9 +117,9 @@ module Allorails
       #
       #  @return (tuple) Pair containing response headers and body
       def _call
-        protocol = Allorails.Conf.network_protocol
-        server   = Allorails.Conf.host
-        timeout  = Allorails.Conf.network_timeout.to_f
+        protocol = Allorails.config.network_protocol
+        server   = Allorails.config.host
+        timeout  = Allorails.config.network_timeout.to_f
 
         port    = protocol == 'https' ? 443 : 80
         uri     = URI(protocol + '://' + server + ApiRequest::API_PATH + _path)
@@ -130,7 +130,7 @@ module Allorails
         }
         
         # use a proxy?
-        use_proxy = true
+        use_proxy = false
         http_class = if use_proxy then Net::HTTP::Proxy('127.0.0.1', 9999) else Net::HTTP end
 
         # prepare and send HTTP request

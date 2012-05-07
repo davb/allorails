@@ -1,17 +1,20 @@
 require 'allorails'
+require 'yaml'
 
+# load Allorails configuration options for testing
+#
+# to be able to run these tests, create a test/test-conf.yml file,
+# based on test/test-conf-sample.yml
+# but using your own API credentials
+Allorails.config(YAML.load File.read(File.join(File.dirname(__FILE__), 'test-conf.yml')))
+
+
+# some additional parameters for the tests
 YOUR_SITE_ID = 281629
 TEST_COUNTRY_CODE = 'UK'
 
-describe Allorails::Conf, "#init" do
-  it "reads the configuration file" do
-    # get instance (reads the config file)
-    conf = Allorails.Conf
-    conf.should_not be_nil
-    conf.api_key.should_not be_nil
-    conf.private_key.should_not be_nil
-  end
-end
+
+# run the tests
 
 describe Allorails::Request::ApiRequest, "#init" do
   it "starts" do

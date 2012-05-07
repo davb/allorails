@@ -2,7 +2,7 @@ require 'rubygems'
 require 'rake'
 require 'echoe'
 
-Echoe.new('allorails', '0.2.0') do |p|
+Echoe.new('allorails', '0.3.0') do |p|
   p.description    = "Ruby client for the Allopass online payment REST API"
   p.url            = "http://github.com/davb/allorails"
   p.author         = "Davide Bonapersona"
