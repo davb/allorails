@@ -44,17 +44,30 @@ module Allorails
     #    api_key: <%= read_from_somewhere_else %>
     #
     def self.load_yaml_config
-      
       path = Pathname.new("#{rails_root}/config/allorails.yml")
-      
       if File.exists?(path)
         cfg = YAML::load(ERB.new(File.read(path)).result)
         unless cfg[rails_env]
           raise "config/allorails.yml is missing a section for `#{rails_env}`"
         end
         Allorails.config(cfg[rails_env])
-      end
-      
+      end      
+    end
+    
+  protected
+  
+    def self.rails_env
+      ::Rails.respond_to?(:env) ? ::Rails.env : RAILS_ENV
+    end
+
+    # @private
+    def self.rails_root
+      ::Rails.respond_to?(:root) ? ::Rails.root.to_s : RAILS_ROOT
+    end
+
+    # @private
+    def self.rails_logger
+      ::Rails.respond_to?(:logger) ? ::Rails.logger : ::RAILS_DEFAULT_LOGGER
     end
     
   end
