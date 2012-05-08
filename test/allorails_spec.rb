@@ -31,10 +31,11 @@ end
 
 describe Allorails::Api, "#get_onetime_pricing" do
   api = Allorails::Api.new
-  resp = api.get_onetime_pricing({'site_id' => YOUR_SITE_ID, 'country' => TEST_COUNTRY_CODE})
   it "returns a valid response" do
+    resp = api.get_onetime_pricing({'site_id' => YOUR_SITE_ID, 'country' => TEST_COUNTRY_CODE})
     resp.to_s.should_not be_nil
     resp.creation_date.is_a?(DateTime).should be_true
+    resp.website.is_a?(Allorails::Website).should be_true
     resp.regions.is_a?(Array).should be_true
     resp.regions.each do |reg|
       reg.is_a?(Allorails::Region).should be_true
@@ -44,6 +45,10 @@ describe Allorails::Api, "#get_onetime_pricing" do
         (ctry.code.length > 0).should be_true
       end
     end
+  end
+  it "works with symbol keys and values" do
+    resp = api.get_onetime_pricing({:site_id => YOUR_SITE_ID, :country => TEST_COUNTRY_CODE.to_sym})
+    resp.creation_date.is_a?(DateTime).should be_true
   end
 end
 

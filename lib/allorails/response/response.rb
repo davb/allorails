@@ -123,7 +123,7 @@ module Allorails
     
       ## Provides the website
       #  @return (Website) website
-      node_reader :website
+      node_reader :website, Website
     
       ## Provides the pricepoints by countries
       #  @return (Array) available countries (list of Country object)
@@ -190,7 +190,7 @@ module Allorails
     
       ## Provides the website
       #  @return (Website) website
-      node_reader :website
+      node_reader :website, Website
     
       ## Provides the customer ip
       #  @return (string) customer ip
@@ -256,7 +256,7 @@ module Allorails
     
       ## Provides the website
       #  @return (Website) website
-      node_reader :website
+      node_reader :website, Website
     
       ## Provides the expected number of codes
       #  @return (int) expected number of codes
@@ -306,7 +306,7 @@ module Allorails
     
       ## Provides the website
       #  @return (Website) website
-      node_reader :website
+      node_reader :website, Website
     
       ## Provides the buy url
       #  @return (string) buy url

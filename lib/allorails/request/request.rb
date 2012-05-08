@@ -38,7 +38,7 @@ module Allorails
       #  @param emailAccount (string) Configurated email account
       def initialize(parameters, mapping = true, email_account = nil)
         @_mapping = mapping
-        @_parameters = parameters
+        @_parameters = _stringify_symbols parameters
         @_email_account = email_account
       end
 
@@ -54,6 +54,14 @@ module Allorails
         else
           return Allorails::Response::ApiResponse.new(signature, headers, body)
         end
+      end
+      
+      # Internal method to turn symbols (keys and values) into strings
+      def _stringify_symbols x
+        return x.to_s if x.is_a?(Symbol)
+        return x.map{|y| _stringify_symbols y} if x.is_a?(Array)
+        return x.inject({}) {|h, (k,v)| h[_stringify_symbols k] = _stringify_symbols v; h} if x.is_a?(Hash)
+        return x
       end
 
       ## Internal method building special required API parameters
