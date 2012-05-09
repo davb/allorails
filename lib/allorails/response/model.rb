@@ -84,7 +84,7 @@ module Allorails
     ## Provides the pricepoints available in this market
     #  @return (Array) available pricepoints (list of Pricepoint objects)
     def pricepoints
-      json.children.values.map{|c| ::Allorails::Pricepoint.new(c)}
+      json.pricepoint.map{|c| ::Allorails::Pricepoint.new(c)}
     end
     
   end
@@ -99,7 +99,7 @@ module Allorails
   
     ## Provides the amount
     #  @return (float) amount
-    node_reader :currency, Float
+    node_reader :amount, Float
   
     ## Provides the day's exchange rate
     #  @return (float) exchange rate

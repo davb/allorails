@@ -34,6 +34,7 @@ describe Allorails::Api, "#get_onetime_pricing" do
   it "returns a valid response" do
     resp = api.get_onetime_pricing({'site_id' => YOUR_SITE_ID, 'country' => TEST_COUNTRY_CODE})
     resp.to_s.should_not be_nil
+    
     resp.creation_date.is_a?(DateTime).should be_true
     resp.website.is_a?(Allorails::Website).should be_true
     resp.regions.is_a?(Array).should be_true
@@ -43,6 +44,28 @@ describe Allorails::Api, "#get_onetime_pricing" do
       reg.countries.each do |ctry|
         ctry.is_a?(Allorails::Country).should be_true
         (ctry.code.length > 0).should be_true
+      end
+    end
+    
+    resp.markets.is_a?(Array).should be_true
+    resp.markets.each do |m|
+      m.is_a?(Allorails::Market).should be_true
+      m.country_code.is_a?(String).should be_true
+      m.country.is_a?(String).should be_true
+      m.pricepoints.is_a?(Array).should be_true
+      m.pricepoints.each do |pp|
+        pp.is_a?(Allorails::Pricepoint).should be_true
+        pp.price.is_a?(Allorails::Price).should be_true
+        pp.payout.is_a?(Allorails::Payout).should be_true
+        
+        [pp.price, pp.payout].each do |ppp|
+          ppp.currency.is_a?(String).should be_true
+          ppp.amount.is_a?(Float).should be_true
+          ppp.exchange.is_a?(Float).should be_true
+          ppp.reference_currency.is_a?(String).should be_true
+          ppp.reference_amount.is_a?(Float).should be_true
+        end
+        
       end
     end
   end

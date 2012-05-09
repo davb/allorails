@@ -23,11 +23,6 @@ module Allorails
       def _verify
         raise Allorails::ApiFalseResponseSignatureError unless @_headers['x-allopass-response-signature'].include?(@_signature)
       end
-      
-      ## Custom print result
-      def to_s
-        @_body
-      end
     
     end # -- end class ApiResponse
     
@@ -93,7 +88,7 @@ module Allorails
         cast = case true
           when type == String then Proc.new{|x| x.to_s}
           when type == Integer then Proc.new{|x| x.to_i}
-          when type == Float then Proc.new{|x| to_f}
+          when type == Float then Proc.new{|x| x.to_f}
           when type == DateTime then Proc.new{|x| x.date.nil? ? (x.timestamp.nil? ? nil : DateTime.strptime(x.timestamp, "%s")) : DateTime.strptime(x.date)}
           else Proc.new{|x| type.new x}
         end
