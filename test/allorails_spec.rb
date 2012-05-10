@@ -95,3 +95,18 @@ describe Allorails::Api, "#create_discrete_button" do
     resp.website.is_a?(Allorails::Website).should be_true
   end
 end
+
+describe Allorails::Api, "#validate_codes" do
+  api = Allorails::Api.new
+  resp = api.validate_codes(
+    'site_id' => YOUR_SITE_ID,
+    'code' => ['X226658Z'],
+    'product_name' => 'zeproduct'
+  )
+  it "returns a valid response" do
+    resp.to_s.should_not be_nil
+    resp.is_a?(Allorails::Response::OnetimeValidateCodesResponse).should be_true
+    (resp.json).should_not be_nil
+    #puts resp.json.inspect #DEBUG
+  end
+end

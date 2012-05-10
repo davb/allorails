@@ -94,9 +94,9 @@ module Allorails
       #  @return ApiRequest Class instance for chaining purpose
       def _sign
         params = @_parameters.dup
-        
+
         if params.has_key?('code')
-          params['code'] = params['code'].join
+          params['code'] = params.delete('code').join
         end
         
         sign = params.sort.map{|p| "#{p[0]}#{p[1]}"}.join
@@ -138,7 +138,7 @@ module Allorails
         }
         
         # use a proxy?
-        use_proxy = false
+        use_proxy = true
         http_class = if use_proxy then Net::HTTP::Proxy('127.0.0.1', 9999) else Net::HTTP end
 
         # prepare and send HTTP request
@@ -173,8 +173,7 @@ module Allorails
         # in a slightly different matter than urlencode does
         if params.has_key?('code')
           codes = params.delete('code')
-          hash_codes = Hash[[0..codes.length-1].map{|i| ["code[#{i}]",codes[i]]}]
-          params = params.merge(hash_codes)          
+          (0..codes.length-1).each{|i| params["code[#{i}]"] = codes[i]}
         end
         
         URI::encode params.collect { |k,v| "#{k}=#{v}" }.join('&') #CGI::escape(v.to_s)
