@@ -138,7 +138,7 @@ module Allorails
         }
         
         # use a proxy?
-        use_proxy = true
+        use_proxy = false
         http_class = if use_proxy then Net::HTTP::Proxy('127.0.0.1', 9999) else Net::HTTP end
 
         # prepare and send HTTP request
