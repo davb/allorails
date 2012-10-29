@@ -1,0 +1,13 @@
+Manifest
+README.md
+Rakefile
+allorails.gemspec
+init.rb
+lib/allorails.rb
+lib/allorails/api/api.rb
+lib/allorails/core.rb
+lib/allorails/errors/errors.rb
+lib/allorails/rails.rb
+lib/allorails/request/request.rb
+lib/allorails/response/model.rb
+lib/allorails/response/response.rb
