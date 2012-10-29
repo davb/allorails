@@ -7,7 +7,7 @@ Echoe.new('allorails', '0.4.2') do |p|
   p.url            = "http://github.com/davb/allorails"
   p.author         = "Davide Bonapersona"
   p.email          = "davide@feeligo.com"
-  p.ignore_pattern = ["tmp/*", "script/*"]
+  p.ignore_pattern = ["tmp/*", "script/*", "test/*"]
   p.development_dependencies = []
 end
 
