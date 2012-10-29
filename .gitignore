@@ -1,6 +1,5 @@
 pkg
 doc
-Manifest
 conf/conf.*
 test/test-conf.*
 *.gem
