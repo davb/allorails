@@ -108,7 +108,7 @@ module Allorails
       # registers configuration options
       add_option :accounts, {}
       add_option :default_hash, 'sha1'
-      add_option :default_format, 'json'
+      add_option :default_format, Allorails::Request::ApiRequest::MAPPING_FORMAT
       add_option :network_timeout, 20
       add_option :network_protocol, 'http'
       add_option :network_port, 80

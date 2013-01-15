@@ -8,7 +8,7 @@ module Allorails
     class ApiRequest
 
       # API response format needed to provide response object mapping
-      MAPPING_FORMAT = 'json'
+      MAPPING_FORMAT = 'xml'
       # API remote base path
       API_PATH = '/rest'
 

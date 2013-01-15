@@ -1,5 +1,6 @@
 pkg
 doc
 conf/conf.*
-test/test-conf.*
+spec/test-conf.*
 *.gem
+.DS_Store

@@ -1,8 +1,4 @@
-require 'allorails/core'
-
-require 'allorails/errors/errors'
-
-module Allorails
+module Allorails  
   
   #autoload :Conf, 'allorails/conf'
   autoload :Api, 'allorails/api/api'
@@ -22,7 +18,7 @@ module Allorails
   autoload :Keyword, 'allorails/response/model'
   autoload :Partner, 'allorails/response/model'
   autoload :Code, 'allorails/response/model'
-  
+
   module Request
     autoload :ApiRequest, 'allorails/request/request'
     autoload :OnetimePricingRequest, 'allorails/request/request'
@@ -37,15 +33,20 @@ module Allorails
   end
 
   module Response
-    autoload :ApiResponse, 'allorails/response/response'
-    autoload :OnetimePricingResponse, 'allorails/response/response'
-    autoload :OnetimeValidateCodesResponse, 'allorails/response/response'
-    autoload :ProductDetailResponse, 'allorails/response/response'
-    autoload :TransactionPrepareResponse, 'allorails/response/response'
-    autoload :TransactionDetailResponse, 'allorails/response/response'
-    autoload :OnetimeButtonResponse, 'allorails/response/response'
+    autoload :ApiResponse,                    'allorails/response/api_response'
+    autoload :ApiMappingResponse,             'allorails/response/api_mapping_response'
+    autoload :OnetimePricingResponse,         'allorails/response/onetime_pricing_response'
+    autoload :OnetimeValidateCodesResponse,   'allorails/response/onetime_validate_codes_response'
+    autoload :ProductDetailResponse,          'allorails/response/product_detail_response'
+    autoload :TransactionPrepareResponse,     'allorails/response/transaction_prepare_response'
+    autoload :TransactionDetailResponse,      'allorails/response/transaction_detail_response'
+    autoload :OnetimeButtonResponse,          'allorails/response/onetime_button_response'
   end
-  
+
 end
+
+require 'allorails/core'
+
+require 'allorails/errors/errors'
 
 require 'allorails/rails'

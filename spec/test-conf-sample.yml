@@ -4,7 +4,6 @@ accounts:
     private_key: 50372be654ecacf9dbb1b431535f21d0
 
 default_hash: sha1
-default_format: json
 network_timeout: 20
 network_protocol: http
 network_port: 80

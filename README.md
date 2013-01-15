@@ -54,7 +54,6 @@ You can put your configuration options in a yaml file located at `config/allorai
       # optional settings
       # (the values below are the defaults)
       default_hash: "sha1"
-      default_format: "json"
       network_timeout: 20
       network_protocol: "http"
       network_port: 80

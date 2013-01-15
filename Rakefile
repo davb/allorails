@@ -2,8 +2,8 @@ require 'rubygems'
 require 'rake'
 require 'echoe'
 
-Echoe.new('allorails', '0.4.2') do |p|
-  p.description    = "Ruby client for the Allopass online payment REST API"
+Echoe.new('allorails', '0.5.0') do |p|
+  p.description    = "Ruby/Rails client for the Allopass online payment API"
   p.url            = "http://github.com/davb/allorails"
   p.author         = "Davide Bonapersona"
   p.email          = "davide@feeligo.com"
