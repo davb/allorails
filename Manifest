@@ -20,7 +20,3 @@ lib/allorails/response/onetime_validate_codes_response.rb
 lib/allorails/response/product_detail_response.rb
 lib/allorails/response/transaction_detail_response.rb
 lib/allorails/response/transaction_prepare_response.rb
-spec/allorails_spec.rb
-spec/spec_helper.rb
-spec/test-conf-sample.yml
-spec/test-conf.yml
