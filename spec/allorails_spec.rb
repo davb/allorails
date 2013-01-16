@@ -2,7 +2,7 @@ require 'spec_helper'
 
 # test config
 YOUR_SITE_ID = 281629
-TEST_COUNTRY_CODE = 'UK'
+TEST_COUNTRY_CODE = 'FR'
 Allorails.config(YAML.load File.read(File.join(File.dirname(__FILE__), 'test-conf.yml')))
 
 
@@ -430,7 +430,8 @@ end
 
 
 describe Allorails::Keyword do
-  include_context "with pricepoint"
+  include_context "with market"
+  let(:pricepoint) { market ? market.pricepoints.keep_if{|pp| !pp.keywords.empty?}.first : nil } 
   let(:keyword) { pricepoint.keywords.first }
 
   before(:all) do

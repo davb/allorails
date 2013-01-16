@@ -176,7 +176,7 @@ module Allorails
   
     ## Provides a description of the keyword
     #  @return (string) description
-    attribute_reader :description
+    node_reader :description
     
   end
   
