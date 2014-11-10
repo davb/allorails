@@ -23,7 +23,7 @@ class Allorails::Response::ProductDetailResponse < Allorails::Response::ApiMappi
 
   ## Provides the website
   #  @return (Website) website
-  node_reader :website, Website
+  node_reader :website, Allorails::Website
 
   ## Provides the expected number of codes
   #  @return (int) expected number of codes
