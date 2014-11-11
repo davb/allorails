@@ -193,8 +193,29 @@ describe Allorails::Response::OnetimeValidateCodesResponse do
 end
 
 
+shared_context "with ProductDetailResponse" do
+  let(:product_id){1162361}
+  let(:response) do
+    Allorails::Api.new.get_product(product_id, {
+      'site_id' => YOUR_SITE_ID,
+    })
+  end
+end
+
+
 describe Allorails::Response::ProductDetailResponse do
-  pending "TODO: write spec"
+  include_context "with ProductDetailResponse"
+
+  # the examples below are meaningless if the request fails
+  before(:all) do
+    if response.nil?
+      raise "ProductDetail: the API returned a failure. Please make sure you are testing with valid product id"
+    end
+  end
+
+  it "has valid product id" do
+    response.id.should eq product_id
+  end
 end
 
 
