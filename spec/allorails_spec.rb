@@ -105,7 +105,7 @@ end
 shared_context "with OnetimeValidateCodesResponse" do
   let(:response) { Allorails::Api.new.validate_codes(
     'site_id' => YOUR_SITE_ID,
-    'code' => ['X69986V9'],
+    'code' => ['X878Z532'],
     'product_name' => 'whatever'
   )}
 end
@@ -190,6 +190,11 @@ describe Allorails::Response::OnetimeValidateCodesResponse do
     response.partners.should be_a(Array)
     response.partners.each {|c| c.should be_a(Allorails::Partner)}
   end
+end
+
+
+describe Allorails::Response::ProductDetailResponse do
+  pending "TODO: write spec"
 end
 
 
