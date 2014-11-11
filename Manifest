@@ -3,7 +3,6 @@ Gemfile.lock
 Manifest
 README.md
 Rakefile
-allorails.gemspec
 init.rb
 lib/allorails.rb
 lib/allorails/api/api.rb
