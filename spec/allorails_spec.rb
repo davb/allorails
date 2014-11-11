@@ -105,7 +105,7 @@ end
 shared_context "with OnetimeValidateCodesResponse" do
   let(:response) { Allorails::Api.new.validate_codes(
     'site_id' => YOUR_SITE_ID,
-    'code' => ['X69986V9'],
+    'code' => ['X878Z532'],
     'product_name' => 'whatever'
   )}
 end
@@ -189,6 +189,32 @@ describe Allorails::Response::OnetimeValidateCodesResponse do
   it "has valid partners" do
     response.partners.should be_a(Array)
     response.partners.each {|c| c.should be_a(Allorails::Partner)}
+  end
+end
+
+
+shared_context "with ProductDetailResponse" do
+  let(:product_id){1162361}
+  let(:response) do
+    Allorails::Api.new.get_product(product_id, {
+      'site_id' => YOUR_SITE_ID,
+    })
+  end
+end
+
+
+describe Allorails::Response::ProductDetailResponse do
+  include_context "with ProductDetailResponse"
+
+  # the examples below are meaningless if the request fails
+  before(:all) do
+    if response.nil?
+      raise "ProductDetail: the API returned a failure. Please make sure you are testing with valid product id"
+    end
+  end
+
+  it "has valid product id" do
+    response.id.should eq product_id
   end
 end
 
