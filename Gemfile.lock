@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    allorails (0.5.1)
+    allorails (0.5.2)
 
 GEM
   remote: http://rubygems.org/
